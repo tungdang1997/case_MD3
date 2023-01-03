@@ -4,24 +4,23 @@ const qs = require("qs");
 const connection = require("../../model/connection");
 const userRouting = require('../handle/userRouting');
 const userService = require('../../service/userService');
-const path = require("path");
+
 
 class ProductRouting {
     showAllProductAdmin(req, res) {
-        if (req.method === 'GET') {
-            let htmlAdmin = '';
-            fs.readFile('./views/uploadForm.html', "utf-8", async (err, showHtml) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    let products = await productService.getProducts();
-                    htmlAdmin += `<div class="container">
+        let htmlAdmin = '';
+        fs.readFile('./views/product/show.html', "utf-8", async (err, showHtml) => {
+            if (err) {
+                console.log(err);
+            } else {
+                let products = await productService.getProducts();
+                htmlAdmin += `<div class="container">
                 <div class="row ">`
-                    products.forEach((value) => {
-                        htmlAdmin += `
+                products.forEach((value) => {
+                    htmlAdmin += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
-                                        <img src="${value.image}" class="card-img-top" alt="...">
+                                        <img src="${value.img}" class="card-img-top" alt="...">
                                          <div class="card-body">
                                              <h5 class="card-title">${value.name}</h5>
                                                 <p class="card-text">Giá: ${value.price}</p> 
@@ -30,30 +29,16 @@ class ProductRouting {
                 </div>
                 </div>
                 </div>`
-                    })
-                }
-                htmlAdmin += "</div></div>"
-                showHtml = showHtml.replace('{products}', htmlAdmin);
-                res.writeHead(200, {'Content-Type': 'text/html'});
-                res.write(showHtml);
-                res.end();
-            });
-        } else {
-            let data1 = '';
-            req.on('data', chunk => {
-                data1 += chunk;
-            })
-            req.on('end', async err => {
-                if (err) {
-                    console.log(err)
-                } else {
-                    const product = qs.parse(data1);
-                    const mess = await productService.add(product);
-                    res.writeHead(301, {location: '/user'});
-                    res.end();
-                }
-            })
-        }
+                })
+            }
+            htmlAdmin += "</div></div>"
+            showHtml = showHtml.replace('{products}', htmlAdmin);
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            res.write(showHtml);
+            res.end();
+        });
+
+
     }
 
     showAddProduct(req, res) {
@@ -74,44 +59,44 @@ class ProductRouting {
                 const newProduct = qs.parse(dataProduct);
                 let data = await productService.add(newProduct);
                 console.log(data)
-                res.writeHead(301, {'location': `/admin/uploadProduct/${data.insertId}`});
+                res.writeHead(301, {'location': `/admin/showAllProduct`});
                 res.end();
             });
         }
     }
 
-    showFormUpload(req, res, id) {
-        if (req.method === 'GET') {
-            fs.readFile('./views/uploadForm.html', 'utf-8', (err, upLoadHtml) => {
-                if (err) {
-                    console.log(err)
-                } else {
-                    res.writeHead(200, 'text/html');
-                    res.write(upLoadHtml);
-                    res.end();
-                }
-            })
-        } else {
-            let form = new formidable.IncomingForm();
-            form.parse(req, async function (err, fields, files) {
-                if (err) {
-                    console.log(err)
-                }
-                let tmpPath = files.img.filepath;
-                let newPath = path.join(__dirname, '..', '..', "./views/menu/IMG", files.img.originalFilename);
-                fs.readFile(newPath, (err) => {
-                    if (err) {
-                        fs.copyFile(tmpPath, newPath, (err) => {
-                            if (err) throw err;
-                        });
-                    }
-                })
-                await productService.editImage(files.img.originalFilename, id);
-                res.writeHead(301, {'location': '/admin/showAllProduct'})
-                res.end();
-            });
-        }
-    }
+    // showFormUpload(req, res, id) {
+    //     if (req.method === 'GET') {
+    //         fs.readFile('./views/uploadForm.html', 'utf-8', (err, upLoadHtml) => {
+    //             if (err) {
+    //                 console.log(err)
+    //             } else {
+    //                 res.writeHead(200, 'text/html');
+    //                 res.write(upLoadHtml);
+    //                 res.end();
+    //             }
+    //         })
+    //     } else {
+    //         let form = new formidable.IncomingForm();
+    //         form.parse(req, async function (err, fields, files) {
+    //             if (err) {
+    //                 console.log(err)
+    //             }
+    //             let tmpPath = files.img.filepath;
+    //             let newPath = path.join(__dirname, '..', '..', "./views/menu/IMG", files.img.originalFilename);
+    //             fs.readFile(newPath, (err) => {
+    //                 if (err) {
+    //                     fs.copyFile(tmpPath, newPath, (err) => {
+    //                         if (err) throw err;
+    //                     });
+    //                 }
+    //             })
+    //             await productService.editImage(files.img.originalFilename, id);
+    //             res.writeHead(301, {'location': '/admin/showAllProduct'})
+    //             res.end();
+    //         });
+    //     }
+    // }
 
     showEditProduct(req, res, id) {
         if (req.method === "GET") {
@@ -198,7 +183,7 @@ class ProductRouting {
                                 html += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
-                                        <img src="${value.image}" class="card-img-top" alt="...">
+                                        <img src="${value.img}" class="card-img-top" alt="...">
                                          <div class="card-body">
                                              <h5 class="card-title">${value.name}</h5>
                                                 <p class="card-text">Giá: ${value.price}</p> 
@@ -248,7 +233,7 @@ class ProductRouting {
                                 html += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
-                                        <img src="${value.image}" class="card-img-top" alt="...">
+                                        <img src="${value.img}" class="card-img-top" alt="...">
                                          <div class="card-body">
                                              <h5 class="card-title">${value.name}</h5>
                                                 <p class="card-text">Giá: ${value.price}</p> 
@@ -283,7 +268,7 @@ class ProductRouting {
                         html += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
-                                        <img src="${value.image}" class="card-img-top" alt="...">
+                                        <img src="${value.img}" class="card-img-top" alt="...">
                                          <div class="card-body">
                                              <h5 class="card-title">${value.name}</h5>
                                                 <p class="card-text">Giá: ${value.price}</p> 
@@ -318,7 +303,7 @@ class ProductRouting {
                         html += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
-                                        <img src="${value.image}" class="card-img-top" alt="...">
+                                        <img src="${value.img}" class="card-img-top" alt="...">
                                          <div class="card-body">
                                              <h5 class="card-title">${value.name}</h5>
                                                 <p class="card-text">Giá: ${value.price}</p> 
@@ -353,11 +338,11 @@ class ProductRouting {
                         html += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
-                                        <img src="${value.image}" class="card-img-top" alt="...">
+                                        <img src="${value.img}" class="card-img-top" alt="...">
                                          <div class="card-body">
                                              <h5 class="card-title">${value.name}</h5>
                                                 <p class="card-text">Giá: ${value.price}</p> 
-                                                <a href="/user/showCart${value.id}"><button class="btn btn-primary" type="submit">Thêm vào giỏ hàng</button></a>
+                                                <a href="/user/${value.id}"><button class="btn btn-primary" type="submit">Thêm vào giỏ hàng</button></a>
                 </div>
                 </div>
                 </div>`
@@ -392,13 +377,13 @@ class ProductRouting {
             req.on('end', async () => {
                 const quantityB = qs.parse(quantityBuy);
                 if (quantityB.quantity > quantityP.quantity) {
-                    res.writeHead(301, {'location': '/user/addProductToOrderDetail'});
+                    res.writeHead(301, {'location': '/user'});
                     res.end();
                 } else {
                     await productService.addProductToOrderDetail(quantityB.quantity, idOrderFind, idP);
                     let quantityAfterBuy = quantityP.quantity - quantityB.quantity;
                     await productService.quantityAfterBuy(quantityAfterBuy, idP);
-                    res.writeHead(301, {'location': '/user/purchase'});
+                    res.writeHead(301, {'location': '/user'});
                     res.end();
                 }
             });

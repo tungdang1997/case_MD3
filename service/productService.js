@@ -33,9 +33,10 @@ class ProductService {
 
     add(product) {
         let connect = connection.getConnection();
+        product.img = "../views/menu/IMG" + product.img;
         return new Promise((resolve, reject) => {
-            const sql = `INSERT INTO products(name, price, quantity)
-                         values ("${product.name}", ${product.price}, ${product.quantity})`;
+            const sql = `INSERT INTO products(name, price, quantity, IMG)
+                         values ("${product.name}", ${product.price}, ${product.quantity}, "${product.img}")`;
             connect.query(sql, function (err) {
                 if (err) {
                     reject(err);
@@ -225,11 +226,11 @@ class ProductService {
     }
 
     //Thêm sản phẩm vào hóa đơn(oD)
-    addProductToOrderDetail(quantity, idO, idP) {
+    addProductToOrderDetail(quantity, idOrder, idProduct) {
         let connect = connection.getConnection();
         return new Promise((resolve, reject) => {
             const sql = `INSERT INTO orderdetail(quantity, idOrder, idProduct)
-                         values (${quantity}, ${idO}, ${idP})`;
+                         values (${quantity}, ${idOrder}, ${idProduct})`;
             connect.query(sql, (err) => {
                 if (err) {
                     reject(err);
@@ -246,9 +247,9 @@ class ProductService {
         return new Promise((resolve, reject) => {
             const sql = `select SUM(orderdetail.quantity) as quantity, products.id, products.name, products.price
                          from orderdetail d
-                                  join products p on d.idProduct = p.id
+                                  join products p on idProduct = p.id
                                   join order o on o.id = d.idOrder
-                         where idOrder = ${idO}
+                         where d.idOrder = ${idO}
                          group by id`
             connect.query(sql, (err, products) => {
                 if (err) {
@@ -260,21 +261,21 @@ class ProductService {
         })
     }
 
-    editImage(image, id) {
-        let connect = connection.getConnection();
-        return new Promise((resolve, reject) => {
-            connect.query(`update products
-                                         set image = '${image}',
-                                             where id = ${id}`, (err, image) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    console.log('Edit Success !!!');
-                    resolve(image);
-                }
-            })
-        })
-    }
+    // editImage(image, id) {
+    //     let connect = connection.getConnection();
+    //     return new Promise((resolve, reject) => {
+    //         connect.query(`update products
+    //                                      set image = '${image}',
+    //                                          where id = ${id}`, (err, image) => {
+    //             if (err) {
+    //                 reject(err);
+    //             } else {
+    //                 console.log('Edit Success !!!');
+    //                 resolve(image);
+    //             }
+    //         })
+    //     })
+    // }
 }
 
 module.exports = new ProductService();

@@ -9,8 +9,7 @@ class UserService {
 
     login(user, res) {
         let connect = connection.getConnection();
-        connect.query(`SELECT *
-                                     FROM users`, (err, results) => {
+        connect.query(`SELECT *FROM users`, (err, results) => {
             if (err) {
                 console.log(err);
             } else {
@@ -23,7 +22,7 @@ class UserService {
                         if (user.name === results[i].name && user.password === results[i].password) {
                             check = true;
                             idUser = results[i].id;
-                            res.writeHead(301, {'location': '/user'});
+                            res.writeHead(301, {'location': '/admin'});
                             res.end();
                         }
                     }
@@ -40,14 +39,42 @@ class UserService {
         });
     }
 
-    getIdUser() {
+    getIdUser(){
         return idUser;
     }
 
+    // getIdUser(idUs) {
+    //     let connect = connection.getConnection();
+    //     return new Promise((resolve, reject) => {
+    //         const sql = `select *
+    //                      from orders
+    //                      where idUser = ${idUs}
+    //                      `
+    //         connect.query(sql, (err, results) => {
+    //             if (err) {
+    //                 reject(err)
+    //             }
+    //             resolve(results[0].id)
+    //         })
+    //     })
+    // }
+
+    // findById(id) {
+    //     let connet = Connection.getConnection();
+    //     return new Promise((resolve, reject) => {
+    //         conne.query(`SELECT * FROM user WHERE id = ${id}`,(err, user) => {
+    //             if (err) {
+    //                 reject(err)
+    //             } else {
+    //                 resolve(user)
+    //             }
+    //         })
+    //     })
+    // }
+
     register(newUser, res) {
         let connect = connection.getConnection();
-        connect.query(`SELECT *
-                                     FROM users`, function (err, results) {
+        connect.query(`SELECT * FROM users`, function (err, results) {
             if (err) {
                 console.log(err);
             } else {
