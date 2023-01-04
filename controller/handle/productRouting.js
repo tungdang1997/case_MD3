@@ -17,15 +17,17 @@ class ProductRouting {
                 htmlAdmin += `<div class="container">
                 <div class="row ">`
                 products.forEach((value) => {
+                    console.log(value)
                     htmlAdmin += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
-                                        <img src="${value.img}" class="card-img-top" alt="...">
+                                        <img src="../views/menu/IMG/${value.IMG}" class="card-img-top" alt="...">
                                          <div class="card-body">
                                              <h5 class="card-title">${value.name}</h5>
                                                 <p class="card-text">Giá: ${value.price}</p> 
                                                 <a  href="/admin/deleteProduct/${value.id}" ><button class="btn btn-primary" type="submit">Delete</button></a>
                                                     <a href="/admin/editProduct/${value.id}"><button class="btn btn-primary" type="submit">Edit</button></a>
+                                                        <a href="/user/addProductToOrder/${value.id}"><button class="btn btn-primary" type="submit">Order</button></a>
                 </div>
                 </div>
                 </div>`
@@ -107,6 +109,7 @@ class ProductRouting {
                     let product = await productService.findById(id);
                     editHtml = editHtml.replace('{name}', product[0].name);
                     editHtml = editHtml.replace('{price}', product[0].price);
+                    editHtml = editHtml.replace('{img}', product[0].img);
                     res.writeHead(200, 'text/html');
                     res.write(editHtml);
                     res.end();
@@ -183,11 +186,11 @@ class ProductRouting {
                                 html += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
-                                        <img src="${value.img}" class="card-img-top" alt="...">
+                                        <img src="../views/menu/IMG/${value.IMG}" class="card-img-top" alt="...">
                                          <div class="card-body">
                                              <h5 class="card-title">${value.name}</h5>
                                                 <p class="card-text">Giá: ${value.price}</p> 
-                                                <a href="/user/${value.id}"><button class="btn btn-primary" type="submit">Thêm vào giỏ hàng</button></a>
+                                                <a href="/user/addProductToOrder/${value.id}"><button class="btn btn-primary" type="submit">Thêm vào giỏ hàng</button></a>
                 </div>
                 </div>
                 </div>`
@@ -233,7 +236,7 @@ class ProductRouting {
                                 html += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
-                                        <img src="${value.img}" class="card-img-top" alt="...">
+                                        <img src="../views/menu/IMG/${value.IMG}" class="card-img-top" alt="...">
                                          <div class="card-body">
                                              <h5 class="card-title">${value.name}</h5>
                                                 <p class="card-text">Giá: ${value.price}</p> 
@@ -268,7 +271,7 @@ class ProductRouting {
                         html += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
-                                        <img src="${value.img}" class="card-img-top" alt="...">
+                                        <img src="../views/menu/IMG/${value.IMG}" class="card-img-top" alt="...">
                                          <div class="card-body">
                                              <h5 class="card-title">${value.name}</h5>
                                                 <p class="card-text">Giá: ${value.price}</p> 
@@ -303,7 +306,7 @@ class ProductRouting {
                         html += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
-                                        <img src="${value.img}" class="card-img-top" alt="...">
+                                        <img src="../views/menu/IMG/${value.IMG}" class="card-img-top" alt="...">
                                          <div class="card-body">
                                              <h5 class="card-title">${value.name}</h5>
                                                 <p class="card-text">Giá: ${value.price}</p> 
@@ -338,7 +341,7 @@ class ProductRouting {
                         html += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
-                                        <img src="${value.img}" class="card-img-top" alt="...">
+                                        <img src="../views/menu/IMG/${value.IMG}" class="card-img-top" alt="...">
                                          <div class="card-body">
                                              <h5 class="card-title">${value.name}</h5>
                                                 <p class="card-text">Giá: ${value.price}</p> 
@@ -375,15 +378,15 @@ class ProductRouting {
                 quantityBuy += chunk;
             });
             req.on('end', async () => {
-                const quantityB = qs.parse(quantityBuy);
+                const quantityB = qs.parse(quantityBuy.length);
                 if (quantityB.quantity > quantityP.quantity) {
-                    res.writeHead(301, {'location': '/user'});
+                    res.writeHead(301, {'location': '/user/showCart'});
                     res.end();
                 } else {
                     await productService.addProductToOrderDetail(quantityB.quantity, idOrderFind, idP);
                     let quantityAfterBuy = quantityP.quantity - quantityB.quantity;
                     await productService.quantityAfterBuy(quantityAfterBuy, idP);
-                    res.writeHead(301, {'location': '/user'});
+                    res.writeHead(301, {'location': '/user/showCart'});
                     res.end();
                 }
             });

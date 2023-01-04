@@ -70,6 +70,7 @@ class UserRouting {
                     html += `<td>${value.name}</td>`
                     html += `<td>${value.price}</td>`
                     html += `<td>${value.quantity}</td>`
+                    html += `<td>${value.IMG}</td>`
                     html += `<td> <form action="/user/addProductToOrder/${value.id}" method="post"> <input type="number" name="quantity"> <button type="submit">Thêm</button></form></td>`
                     html += '</tr>';
                 })
@@ -98,6 +99,7 @@ class UserRouting {
                         html += `<td>${value.name}</td>`
                         html += `<td>${value.price}</td>`
                         html += `<td>${value.quantity}</td>`
+                        html += `<td>${value.IMG}</td>`
                         html += `<td><a href="/user/deleteProduct/${value.id}" ><button type="button">Delete</button></a></td>`
                         html += '</tr>';
                     })

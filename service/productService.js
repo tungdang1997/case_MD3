@@ -33,7 +33,6 @@ class ProductService {
 
     add(product) {
         let connect = connection.getConnection();
-        product.img = "../views/menu/IMG" + product.img;
         return new Promise((resolve, reject) => {
             const sql = `INSERT INTO products(name, price, quantity, IMG)
                          values ("${product.name}", ${product.price}, ${product.quantity}, "${product.img}")`;
@@ -51,9 +50,7 @@ class ProductService {
     findById(id) {
         let connect = connection.getConnection();
         return new Promise((resolve, reject) => {
-            connect.query(`select *
-                                         from products
-                                         where id = ${id}`, (err, product) => {
+            connect.query(`select *from products where id = ${id}`, (err, product) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -100,7 +97,8 @@ class ProductService {
         return new Promise((resolve, reject) => {
             connect.query(`update products
                                          set name  = '${product.name}',
-                                             price = ${product.price}
+                                             price = ${product.price},
+                                             IMG = '${product.img}'
                                          where id = ${id}`, (err, products) => {
                 if (err) {
                     reject(err);
@@ -149,7 +147,7 @@ class ProductService {
         return new Promise((resolve, reject) => {
             connect.query(`select *
                                          from products
-                                         where idCategory = ${idC}`, (err, products) => {
+                                         where idCategory = '${idC}'`, (err, products) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -162,8 +160,8 @@ class ProductService {
 
     createOrder(idUser) {
         let connect = connection.getConnection();
-        const sql = `INSERT INTO orders(idUser, status)
-                     values (${idUser}, false)`;
+        const sql = `INSERT INTO order (idUser, total)
+                     values ('${idUser}', false)`;
         connect.query(sql, (err) => {
             if (err) {
                 console.log(err);
@@ -178,29 +176,29 @@ class ProductService {
         let connect = connection.getConnection();
         return new Promise((resolve, reject) => {
             const sql = `select *
-                         from orders
+                         from order
                          where idUser = ${idU}
-                           and status = false`  //Status = false : chưa thanh toán
+                           and total = false`  //Status = false : chưa thanh toán
             connect.query(sql, (err, results) => {
                 if (err) {
                     reject(err);
                 }
-                if (results.length === 0) {
-                    resolve(false) // false : Người dùng không có hóa đơn chưa thanh toán
+                if (results.length !== 0) {
+                    resolve(true)
                 } else {
-                    resolve(true);
+                    resolve(false); // false : Người dùng không có hóa đơn chưa thanh toán
                 }
             })
         })
     }
 
-    getIdOrder(idU) {
+    getIdOrder(id) {
         let connect = connection.getConnection();
         return new Promise((resolve, reject) => {
-            const sql = `select *
-                         from orders
-                         where idUser = ${idU}
-                           and status = false`
+            const sql = `select order.id
+                         from order
+                         where idUser = ${id}
+                           and total = false`
             connect.query(sql, (err, results) => {
                 if (err) {
                     reject(err)
@@ -220,7 +218,7 @@ class ProductService {
                 if (err) {
                     reject(err)
                 }
-                resolve(results[0])
+                resolve(results[0].id)
             })
         })
     }

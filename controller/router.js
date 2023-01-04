@@ -19,7 +19,7 @@ const router = {
     'user/deleteProduct': userRouting.showDeleteProduct,
     'user/purchase': userRouting.buyProduct,
     'user/deleteCart': userRouting.deleteCart,
-    'admin/uploadProduct': productRouting.showFormUpload,
+    // 'admin/uploadProduct': productRouting.showFormUpload,
 }
 
 module.exports = router;

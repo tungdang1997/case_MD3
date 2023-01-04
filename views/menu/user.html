@@ -1,131 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bootstrap demo</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-          crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-          crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+            crossorigin="anonymous"></script>
 
-  <style>
-    .nav-item {
-      display: block;
-      padding: 0 15px;
-      font-weight: bold;
-      text-decoration: none;
-      color: #333;
-      position: relative;
-    }
+    <style>
+        .nav-item {
+            display: block;
+            padding: 0 15px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+            position: relative;
+        }
 
-    * {
-      text-decoration: none;
-      color: #333;
-    }
+        * {
+            text-decoration: none;
+            color: #333;
+        }
 
-    .nav-item:after {
-      content: "";
-      background: tomato;
-      position: absolute;
-      height: 5px;
-      width: 0;
-      bottom: 0;
-      left: 0;
-      transition: all 0.5s ease-in-out;
-    }
+        .nav-item:after {
+            content: "";
+            background: tomato;
+            position: absolute;
+            height: 5px;
+            width: 0;
+            bottom: 0;
+            left: 0;
+            transition: all 0.5s ease-in-out;
+        }
 
-    .nav-item:hover::after {
-      width: 50%;
-      transform: translatex(50%);
-    }
+        .nav-item:hover::after {
+            width: 50%;
+            transform: translatex(50%);
+        }
 
-    .img-cofe {
-      width: 260px;
-      height: 100%;
-      object-fit: cover;
-    }
+        .img-cofe {
+            width: 260px;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    .search {
-      height: 45px;
-      outline: none;
-      border: 2px solid rgb(20, 219, 20);
-      background-color: transparent;
-      border-radius: 20px 0 0 20px;
-      border-right: none;
-    }
+        .search {
+            height: 45px;
+            outline: none;
+            border: 2px solid rgb(20, 219, 20);
+            background-color: transparent;
+            border-radius: 20px 0 0 20px;
+            border-right: none;
+        }
 
-    .btn1 {
-      height: 45px;
-      outline: none;
-      border: none;
-      background-color: rgb(20, 219, 20);
-      color: white;
-      border-radius: 0 20px 20px 0;
-      transition: all 0.4s;
-    }
+        .btn1 {
+            height: 45px;
+            outline: none;
+            border: none;
+            background-color: rgb(20, 219, 20);
+            color: white;
+            border-radius: 0 20px 20px 0;
+            transition: all 0.4s;
+        }
 
-    .btn1:hover {
-      background-color: rgb(20, 219, 20);
-    }
+        .btn1:hover {
+            background-color: rgb(20, 219, 20);
+        }
 
-    .bi-person-circle {
-      font-size: 30px;
-      color: black;
-      cursor: pointer;
-      padding-top: 5px;
-      transition: all 0.4s;
-    }
+        .bi-person-circle {
+            font-size: 30px;
+            color: black;
+            cursor: pointer;
+            padding-top: 5px;
+            transition: all 0.4s;
+        }
 
-    .bi-person-circle:hover {
-      color: rgb(20, 219, 20);
-    }
+        .bi-person-circle:hover {
+            color: rgb(20, 219, 20);
+        }
 
-    .product {
-      background-color: transparent;
-      transition: all 0.4s;
-      color: black;
-    }
+        .product {
+            background-color: transparent;
+            transition: all 0.4s;
+            color: black;
+        }
 
-    .product:hover {
-      color: rgb(20, 219, 20);
-    }
+        .product:hover {
+            color: rgb(20, 219, 20);
+        }
 
-    .btn {
-      background: rgb(14, 124, 36);
-      border: transparent;
-      transition: all 0.4s ease-in-out;
-    }
+        .btn {
+            background: rgb(14, 124, 36);
+            border: transparent;
+            transition: all 0.4s ease-in-out;
+        }
 
-    .mr-8 {
-      margin-right: 90px;
-      margin-top: 4px;
-      margin-bottom: 18px;
-    }
+        .mr-8 {
+            margin-right: 90px;
+            margin-top: 4px;
+            margin-bottom: 18px;
+        }
 
-    .btn:hover .product {
-      display: block;
-    }
+        .btn:hover .product {
+            display: block;
+        }
 
-    .border-img {
-      height: 420px;
-    }
+        .border-img {
+            height: 420px;
+        }
 
-    #footer {
+        #footer {
 
-      width: 1110px;
-      height: 200px;
-      background-color: gainsboro;
-      margin: 12px auto 46px;
-    }
-  </style>
+            width: 1110px;
+            height: 200px;
+            background-color: gainsboro;
+            margin: 12px auto 46px;
+        }
+    </style>
 
 </head>
 <body>
@@ -133,111 +133,111 @@
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         crossorigin="anonymous"></script>
 <nav class="navbar navbar-expand-lg bg-light">
-  <div class="container">
-    <a class="navbar-brand" href="#"><img src="./views/menu/IMG/logo-ca-phe-nong.jpg" alt="" class="img-cofe"></a>
+    <div class="container">
+        <a class="navbar-brand" href="#"><img src="../views/menu/IMG/hinh-anh-ly-cafe-dep.jpg" alt="" class="img-cofe"></a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav m-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="/admin">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/admin/addProduct">Add</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/admin/showAllProduct">Show All</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Log Out</a>
-        </li>
-      </ul>
-      <form action="/user/findProductByName" method="post" class="d-flex" role="search">
-        <input class="px-2 search" type="search" placeholder="Search" aria-label="Search" name="name">
-        <button class="btn1 me-3 px-3" type="submit">Search</button>
-        <span><i class="bi bi-person-circle"></i></span>
-      </form>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/addProduct">Add</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/showAllProduct">Show All</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Log Out</a>
+                </li>
+            </ul>
+            <form action="/user/findProductByName" method="post" class="d-flex" role="search">
+                <input class="px-2 search" type="search" placeholder="Search" aria-label="Search" name="name">
+                <button class="btn1 me-3 px-3" type="submit">Search</button>
+                <span><i class="bi bi-person-circle"></i></span>
+            </form>
+        </div>
     </div>
-  </div>
 </nav>
 
 <div class="border-img mt-3">
-  <div class="container">
-    <div class="row">
-      <div class="col-2">
-        <h5>Loại Sản Phẩm</h5>
+    <div class="container">
         <div class="row">
-          {category}
-          <!--                    <a href="/admin/showAllProduct" class="col-12">Loai SP 1</a>-->
-          <!--                    <div class="col-12">Loai SP 2</div>-->
-        </div>
-        <hr>
-        <h5>Mức Giá</h5>
-        <div class="row">
-          <div class="col-12" style="" >
-            <form method="post" action="/user/findProductByPrice">
-              <input type="number" name="price1" placeholder="Tu" style="margin-bottom: 4px">
-              <input type="number" name="price2" placeholder=" Den">
-              <button type="submit" style="margin-top: 8px">Tim kiem</button>
-            </form>
-          </div>
-        </div>
-        <hr>
-      </div>
-      <div class="col-8">
-        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="true">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
-                    class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-          </div>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="./views/menu/IMG/hinh-anh-quan-cafe-dep_015843243.png" class="d-block w-100" alt="..."
-                   style="height: 400px">
-              <div class=" d-none d-md-block">
-              </div>
+            <div class="col-2">
+                <h5>Loại Sản Phẩm</h5>
+                <div class="row">
+                    {category}
+                    <!--                    <a href="/admin/showAllProduct" class="col-12">Loai SP 1</a>-->
+                    <!--                    <div class="col-12">Loai SP 2</div>-->
+                </div>
+                <hr>
+                <h5>Mức Giá</h5>
+                <div class="row">
+                    <div class="col-12" style="">
+                        <form method="post" action="/user/findProductByPrice">
+                            <input type="number" name="price1" placeholder="Tu" style="margin-bottom: 4px">
+                            <input type="number" name="price2" placeholder=" Den">
+                            <button type="submit" style="margin-top: 8px">Tim kiem</button>
+                        </form>
+                    </div>
+                </div>
+                <hr>
             </div>
-            <div class="carousel-item">
-              <img src="./views/menu/IMG/30-mau-quan-ca-phe-dep-13-1.png" class="d-block w-100" alt="..."
-                   style="height: 400px">
-              <div class=" d-none d-md-block">
-              </div>
+            <div class="col-8">
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="true">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                                class="active"
+                                aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../views/menu/IMG/hinh-anh-quan-cafe-dep_015843243.png" class="d-block w-100"
+                                 alt="..."
+                                 style="height: 400px">
+                            <div class=" d-none d-md-block">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../views/menu/IMG/30-mau-quan-ca-phe-dep-13-1.png" class="d-block w-100" alt="..."
+                                 style="height: 400px">
+                            <div class=" d-none d-md-block">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../views/menu/IMG/quan-cafe-banh-ha-noi-2.1.jpg" class="d-block w-100" alt="..."
+                                 style="height: 400px">
+                            <div class=" d-none d-md-block">
+                            </div>
+                        </div>
+                    </div>
+                    <button id="previous" class="carousel-control-prev" type="button"
+                            data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button id="next" class="carousel-control-next" type="button"
+                            data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
-            <div class="carousel-item">
-              <img src="./views/menu/IMG/quan-cafe-banh-ha-noi-2.1.jpg" class="d-block w-100" alt="..."
-                   style="height: 400px">
-              <div class=" d-none d-md-block">
-              </div>
-            </div>
-          </div>
-          <button id="previous" class="carousel-control-prev" type="button"
-                  data-bs-target="#carouselExampleCaptions"
-                  data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button id="next" class="carousel-control-next" type="button"
-                  data-bs-target="#carouselExampleCaptions"
-                  data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+            <div class="col-2"></div>
         </div>
-      </div>
-      <div class="col-2"></div>
     </div>
-  </div>
 </div>
 {products}
-</div>
 <div id="container">
-  <div id="footer">
+    <div id="footer">
 
-  </div>
+    </div>
 </div>
 
 
