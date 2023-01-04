@@ -246,7 +246,7 @@
     <div class="container">
         <div class="row">
             <div class="col-2">
-                <h5>Loại Sản Phẩm</h5>
+
                 <div class="row">
                     <!--                    <a href="/admin/showAllProduct" class="col-12">Loai SP 1</a>-->
                     <!--                    <div class="col-12">Loai SP 2</div>-->
@@ -255,8 +255,13 @@
                 <hr>
                 <h5>Mức Giá</h5>
                 <div class="row">
-                    <div class="col-12">0 - 50000</div>
-                    <div class="col-12">50000 - 100000</div>
+                    <div class="col-12" style="">
+                        <form method="post" action="/user/findProductByPrice">
+                            <input type="number" name="price1" placeholder="Tu" style="margin-bottom: 4px">
+                            <input type="number" name="price2" placeholder=" Den">
+                            <button type="submit" style="margin-top: 8px">Tim kiem</button>
+                        </form>
+                    </div>
                 </div>
                 <hr>
             </div>

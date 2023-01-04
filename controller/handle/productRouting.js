@@ -341,7 +341,7 @@ class ProductRouting {
                         html += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
-                                        <img src="../views/menu/IMG/${value.IMG}" class="card-img-top" alt="...">
+                                        <img src="../views/menu/IMG/${value.img}" class="card-img-top" alt="...">
                                          <div class="card-body">
                                              <h5 class="card-title">${value.name}</h5>
                                                 <p class="card-text">Giá: ${value.price}</p> 

@@ -8,7 +8,7 @@ class ProductService {
     getCategory() {
         let connect = connection.getConnection();
         return new Promise((resolve, reject) => {
-            connect.query('select * from category', (err, category) => {
+            connect.query('SELECT * from category', (err, category) => {
                 if (err) {
                     reject(err);
                 } else {

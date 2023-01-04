@@ -99,7 +99,7 @@ class UserRouting {
                         html += `<td>${value.name}</td>`
                         html += `<td>${value.price}</td>`
                         html += `<td>${value.quantity}</td>`
-                        html += `<td>${value.IMG}</td>`
+                        html += `<td>${value.img}</td>`
                         html += `<td><a href="/user/deleteProduct/${value.id}" ><button type="button">Delete</button></a></td>`
                         html += '</tr>';
                     })
