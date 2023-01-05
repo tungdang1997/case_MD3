@@ -39,22 +39,23 @@ class UserService {
         });
     }
 
-    getIdUser(){
-        return idUser;
-    }
+    // getIdUser(){
+    //     return idUser;
+    // }
 
-    // getIdUser(idUs) {
+    // getIdUser(id) {
     //     let connect = connection.getConnection();
     //     return new Promise((resolve, reject) => {
     //         const sql = `select *
-    //                      from orders
-    //                      where idUser = ${idUs}
+    //                      from order.id
+    //                      where idUser = ${id}
     //                      `
     //         connect.query(sql, (err, results) => {
     //             if (err) {
     //                 reject(err)
     //             }
-    //             resolve(results[0].id)
+    //             resolve(results)
+    //             console.log(resolve)
     //         })
     //     })
     // }
@@ -141,13 +142,10 @@ class UserService {
         })
     }
 
-    getTotalPrice(idO) {
+    getTotalPrice(id) {
         let connect = connection.getConnection();
         return new Promise((resolve, reject) => {
-            const sql = `select SUM(orderdetail.quantity * price) as total
-                         from orderdetail
-                                  join products p on p.id = orderdetail.idProduct
-                         where idOrder = "${idO}"`
+            const sql = `select SUM(orderdetail.quantity * price) as total from orderdetail join products p on p.id = orderdetail.idProduct where idOrder = ${id}`
             connect.query(sql, (err, total) => {
                 if (err) {
                     reject(err);
@@ -162,9 +160,7 @@ class UserService {
     buyProduct(idO) {
         let connect = connection.getConnection();
         return new Promise((resolve, reject) => {
-            connect.query(`update orders
-                                         set status = true
-                                         where id = ${idO}`, (err, products) => {
+            connect.query(`update orderdetail set total.order = true where id = ${idO}`, (err, products) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -196,6 +192,6 @@ class UserService {
 
 }
 
-new UserService().getIdUser()
+// new UserService().getIdUser()
 
 module.exports = new UserService();

@@ -14,10 +14,11 @@ class ProductRouting {
                 console.log(err);
             } else {
                 let products = await productService.getProducts();
+                console.log(products)
                 htmlAdmin += `<div class="container">
                 <div class="row ">`
                 products.forEach((value) => {
-                    console.log(value)
+
                     htmlAdmin += `
                                 <div class="col-3 mr-8">
                                     <div class="card mt-12" style="width: 18rem;">
@@ -27,7 +28,7 @@ class ProductRouting {
                                                 <p class="card-text">Giá: ${value.price}</p> 
                                                 <a  href="/admin/deleteProduct/${value.id}" ><button class="btn btn-primary" type="submit">Delete</button></a>
                                                     <a href="/admin/editProduct/${value.id}"><button class="btn btn-primary" type="submit">Edit</button></a>
-                                                        <a href="/user/addProductToOrder/${value.id}"><button class="btn btn-primary" type="submit">Order</button></a>
+                                                        <a href="/user/purchase/${value.id}"><button class="btn btn-primary" type="submit">Order</button></a>
                 </div>
                 </div>
                 </div>`
@@ -365,10 +366,11 @@ class ProductRouting {
     //Thêm sản phẩm vào hóa đơn
     async showAddProductToOrder(req, res, idP) {
 
-        let isExists = await productService.checkOrder(userService.getIdUser());
-        if (!isExists) {
-            await productService.createOrder(userService.getIdUser());
-        }
+        // let isExists = await productService.checkOrder(userService.getIdUser());
+        // if (!isExists) {
+        //
+        // }
+        await productService.createOrder(userService.getIdUser());
         let idOrderFind = await productService.getIdOrder(userService.getIdUser());
         let quantityP = await productService.getQuantityP(idP);
 

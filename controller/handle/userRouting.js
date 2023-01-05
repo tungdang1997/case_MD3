@@ -84,8 +84,8 @@ class UserRouting {
 
     async showCart(req, res) {
         let html = ''
-        let idOrderFind = await productService.getIdOrder(userService.getIdUser());
-        let total = await userService.getTotalPrice(idOrderFind);
+        // let idOrderFind = await productService.getIdOrder(userService.getIdUser());
+        // let total = await userService.getTotalPrice(idOrderFind);
         if (req.method === 'GET') {
             fs.readFile('./views/user/cart.html', "utf-8", async (err, cartHtml) => {
                 if (err) {
@@ -106,7 +106,7 @@ class UserRouting {
                 }
                 res.writeHead(200, {'Content-Type': 'text/html'});
                 cartHtml = cartHtml.replace('{products}', html);
-                cartHtml = cartHtml.replace('{total}', total[0].total);
+                // cartHtml = cartHtml.replace('{total}', total[0].total);
                 res.write(cartHtml);
                 res.end();
             })
@@ -132,13 +132,14 @@ class UserRouting {
         }
     }
 
-    async buyProduct(req, res) {
-        let idOrderFind = await productService.getIdOrder(userService.getIdUser());
-        await userService.buyProduct(idOrderFind);
+    async buyProduct(req, res, id) {
+        // let idOrderFind = await productService.getIdOrder(userService.getIdUser(id));
+        // console.log(idOrderFind)
+        await userService.buyProduct(id);
         fs.readFile('./views/user/cart.html', "utf-8", async (err, cartHtml) => {
             res.writeHead(200, {'Content-Type': 'text/html'});
             cartHtml = cartHtml.replace('{products}', '');
-            cartHtml = cartHtml.replace('{total}', 0);
+            cartHtml = cartHtml.replace('{total}', '');
             res.write(cartHtml);
             res.end();
         })

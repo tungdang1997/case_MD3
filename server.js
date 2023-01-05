@@ -43,7 +43,7 @@ const server = http.createServer((req, res) => {
         } else {
             chosenHandler = router[trimPath];
         }
-        chosenHandler(req, res, arrPath[3]);
+        chosenHandler(req, res, +arrPath[3]);
     }
 })
 

@@ -166,31 +166,32 @@ class ProductService {
             if (err) {
                 console.log(err);
             } else {
+
                 console.log('Insert Data Success !!!');
             }
         })
     }
 
     //Người dùng đang đăng nhập đã có hóa đơn chưa?
-    checkOrder(idU) {
-        let connect = connection.getConnection();
-        return new Promise((resolve, reject) => {
-            const sql = `select *
-                         from order
-                         where idUser = ${idU}
-                           and total = false`  //Status = false : chưa thanh toán
-            connect.query(sql, (err, results) => {
-                if (err) {
-                    reject(err);
-                }
-                if (results.length !== 0) {
-                    resolve(true)
-                } else {
-                    resolve(false); // false : Người dùng không có hóa đơn chưa thanh toán
-                }
-            })
-        })
-    }
+    // checkOrder(idU) {
+    //     let connect = connection.getConnection();
+    //     return new Promise((resolve, reject) => {
+    //         const sql = `select *
+    //                      from order
+    //                      where idUser = ${idU}
+    //                        and total = false`  //Status = false : chưa thanh toán
+    //         connect.query(sql, (err, results) => {
+    //             if (err) {
+    //                 reject(err);
+    //             }
+    //             if (results.length !== 0) {
+    //                 resolve(true)
+    //             } else {
+    //                 resolve(false); // false : Người dùng không có hóa đơn chưa thanh toán
+    //             }
+    //         })
+    //     })
+    // }
 
     getIdOrder(id) {
         let connect = connection.getConnection();
@@ -198,12 +199,13 @@ class ProductService {
             const sql = `select order.id
                          from order
                          where idUser = ${id}
-                           and total = false`
+                           and total = ${id}`
             connect.query(sql, (err, results) => {
+
                 if (err) {
                     reject(err)
                 }
-                resolve(results[0].id)
+                resolve(results)
             })
         })
     }
